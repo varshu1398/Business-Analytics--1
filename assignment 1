@@ -1,0 +1,109 @@
+Question 1
+find 10 data from year 2015
+SELECT * FROM `bigquery-public-data.austin_crime.crime`
+where year = 2015
+limit  10
+
+unique_key	address	census_tract	clearance_date	clearance_status	council_district_code	description	district	latitude	longitude	location	location_description	primary_type	timestamp	x_coordinate	y_coordinate	year	zipcode
+2015150483	"Austin, TX"		2015-01-27 00:00:00 UTC	Not cleared		"RAPE                          "	B					Rape	2015-01-15 00:00:00 UTC			2015	
+20151542027	"Austin, TX"		2015-07-24 00:00:00 UTC	Not cleared		"RAPE                          "	D					Rape	2015-06-03 00:00:00 UTC			2015	
+20152001758	"Austin, TX"		2015-08-15 00:00:00 UTC	Not cleared		"RAPE                          "	F					Rape	2015-07-19 00:00:00 UTC			2015	
+20151340282	"Austin, TX"		2015-06-15 00:00:00 UTC	Cleared by Exception		"RAPE                          "	UK					Rape	2015-05-14 00:00:00 UTC			2015	
+20151871268	"Austin, TX"		2015-10-27 00:00:00 UTC	Not cleared		"RAPE                          "	UK					Rape	2015-07-06 00:00:00 UTC			2015	
+20155032413	"Austin, TX"		2015-10-19 00:00:00 UTC	Not cleared		"RAPE OF A CHILD               "	UK					Rape	2015-07-24 00:00:00 UTC			2015	
+2015900289	"Austin, TX"		2015-04-23 00:00:00 UTC	Not cleared		"RAPE                          "	D					Rape	2015-03-31 00:00:00 UTC			2015	
+20151060966	"Austin, TX"		2015-04-23 00:00:00 UTC	Cleared by Exception		"RAPE                          "	B					Rape	2015-04-16 00:00:00 UTC			2015	
+20151460876	"Austin, TX"		2015-07-15 00:00:00 UTC	Cleared by Exception		"RAPE OF A CHILD               "	UK					Rape	2015-05-26 00:00:00 UTC			2015	
+20155024205	"Austin, TX"		2015-12-17 00:00:00 UTC	Not cleared		"RAPE OF A CHILD               "	UK					Rape	2015-06-05 00:00:00 UTC			2015	
+
+Question 2
+group data by year =2015
+SELECT year, primary_type FROM `bigquery-public-data.austin_crime.crime`
+where year = 2016
+group by year, primary_type
+limit 5
+
+year	primary_type
+2016	Rape
+2016	Theft
+2016	Robbery
+2016	Agg Assault
+2016	Burglary
+
+Q-3
+find the minimum latitude
+select min ( latitude ) from `bigquery-public-data.noaa_tsunami.historical_runups` where year =1995
+f0_
+-36.6953
+
+Question 4
+Find the maximum longitude?
+select max ( longitude ) from `bigquery-public-data.noaa_tsunami.historical_runups` where year =1995
+f0_
+178.4236
+
+Question 5
+find the average distance from source?
+select avg ( distance_from_source ) from `bigquery-public-data.noaa_tsunami.historical_runups` where year =1995
+f0_
+5250.529880478089
+ 
+Question 6
+arrange in ascending order the data from hurricanes.
+select latitude, longitude, usa_longitude , usa_wind from `bigquery-public-data.noaa_hurricanes.hurricanes` 
+order by usa_wind asc limit 5
+latitude	longitude	usa_longitude	usa_wind
+24.225	140.083	140.0	
+14.6667	122.317	122.2	
+15.45	114.5	114.3	
+16.3696	108.652	108.6	
+13.9368	125.453	125.2	
+ 
+Question 7
+Arrange in order descending order the data from hurricanes.
+select latitude, longitude, usa_longitude , usa_wind from `bigquery-public-data.noaa_hurricanes.hurricanes` 
+order by usa_wind desc limit 10
+
+latitude	longitude	usa_longitude	usa_wind
+17.3	-105.6	-105.6	185
+15.5286	137.429	137.5	185
+17.759	-105.492	-105.492	182
+16.8774	-105.56	-105.56	182
+15.8689	136.762	136.792	182
+15.1767	138.115	138.157	182
+16.2224	136.114	136.1	180
+14.806	138.799	138.8	180
+20.0907	140.864	140.9	180
+13.9857	140.1	140.1	180
+
+
+Question 8
+Use join command .
+SELECT `bigquery-public-data.cms_medicare.home_health_agencies_2013`.agency_table,`bigquery-public-data.cms_medicare.home_health_agencies_2014`.street_address FROM `bigquery-public-data.cms_medicare.home_health_agencies_2013` inner join `bigquery-public-data.cms_medicare.home_health_agencies_2014` on `bigquery-public-data.cms_medicare.home_health_agencies_2013`.provider_id = `bigquery-public-data.cms_medicare.home_health_agencies_2014`.provider_id LIMIT 10
+agency_name	street_address
+"AMERICARE CERTIFIED SPECIAL SERVICES, INC CHHA"	5923 STRICKLAND AVENUE
+"BRADBOURNE HEALTHCARE, INC"	16029 ARROW HIGHWAY SUITE A
+"D & N HOME HEALTH SERVICES, INC."	1140 W 50 ST STE 305
+PSN HEALTH CARE CORP	17670 NW 78 AVE   STE 213
+"RAINBOW HOME HEALTH SERVICES, LLC"	"15165 NW 77 AVENUE, SUITE 2013"
+MARTINS FLORIDA ELDER CARE INC	"6501 NW 36ST, STE 307A"
+LIFETIME HOME HEALTH CARE CORP	8785 SW 165TH AVE STE 107
+"SUPREME HOME HEALTH CARE, LLC"	"8910 MIRAMAR PKWY, STE 305"
+POTENTIAL HOME HEALTH CARE	9560 SW 107 AVE BLDG A STE 108
+MERCY HOME HEALTHCARE AGENCY	2102 EAST 21ST STREET NORTH #B
+	
+
+Question 9
+Use join command .
+SELECT `bigquery-public-data.austin_incidents.incidents_2008`.date,`bigquery-public-data.austin_incidents.incidents_2009`.time FROM `bigquery-public-data.austin_incidents.incidents_2008` inner join `bigquery-public-data.austin_incidents.incidents_2009` on `bigquery-public-data.austin_incidents.incidents_2008`. address = `bigquery-public-data.austin_incidents.incidents_2009`. address LIMIT 10
+date	time
+2008-11-15	02:33:00
+2008-11-15	20:24:00
+2008-11-15	02:15:00
+2008-11-15	02:00:00
+2008-11-15	03:09:00
+2008-11-15	02:39:00
+2008-11-15	22:40:00
+2008-11-15	08:30:00
+2008-11-15	20:16:00
+2008-11-15	21:08:00
